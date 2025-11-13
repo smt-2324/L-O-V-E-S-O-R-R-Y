@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love 💖</title>
+
+  <style>
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      font-family: 'Poppins', cursive;
+      background: linear-gradient(180deg, #ffd6ec, #ffe6f2);
+      color: #b3005a;
+      text-align: center;
+    }
+
+    /* floating hearts animation */
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 8s linear infinite;
+      bottom: -20px;
+      opacity: 0.7;
+      border-radius: 2px;
+    }
+    .heart::before, .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-110vh) rotate(45deg); opacity: 0; }
+    }
+
+    /* sections */
+    section {
+      display: none;
+      min-height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding: 30px;
+    }
+    .active { display: flex; }
+
+    /* envelope */
+    .envelope {
+      width: 160px;
+      height: 120px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fff, #fff0f2);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 10px 30px rgba(255, 105, 150, 0.12);
+      cursor: pointer;
+      transition: transform .35s cubic-bezier(.2, .9, .3, 1), box-shadow .35s;
+      position: relative;
+    }
+    .envelope:hover {
+      transform: translateY(-6px) rotate(-2deg);
+      box-shadow: 0 18px 40px rgba(255, 120, 160, 0.18);
+    }
+    .envelope svg {
+      width: 120px;
+      height: auto;
+      display: block;
+    }
+
+    .tap-hint {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 6px;
+      opacity: 0.95;
+      animation: blink 2.2s infinite;
+    }
+    @keyframes blink {
+      0% { opacity: 0.2 }
+      50% { opacity: 1 }
+      100% { opacity: 0.2 }
+    }
+
+    /* couple image */
+    .couple {
+      width: 280px;
+      border-radius: 12px;
+      animation: fadeIn 2s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* button */
+    .btn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff8fb1;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      background: #ff6090;
+    }
+
+    /* love letter */
+    .love-letter {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+      padding: 20px;
+      width: 500px;
+      animation: pop 1s ease;
+    }
+    @keyframes pop {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* doodle cards */
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    .card {
+      position: relative;
+      width: 250px;
+      height: 270px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 0, 100, 0.3);
+      transition: 0.4s;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: 0.4s;
+    }
+    .card:hover img {
+      filter: blur(3px) brightness(0.7);
+    }
+    .card span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-weight: bold;
+      opacity: 0;
+      transition: 0.4s;
+    }
+    .card:hover span { opacity: 1; }
+
+    /* surprise box */
+    .box {
+      width: 150px;
+      height: 150px;
+      background: #ffb6c1;
+      position: relative;
+      border-radius: 8px;
+      animation: boxWiggle 2s infinite ease-in-out;
+      cursor: pointer;
+    }
+    .box::before {
+      content: '';
+      position: absolute;
+      width: 150px;
+      height: 20px;
+      background: #ff99c8;
+      top: -20px;
+      left: 0;
+      border-radius: 8px 8px 0 0;
+    }
+    @keyframes boxWiggle {
+      0%, 100% { transform: rotate(0); }
+      50% { transform: rotate(2deg); }
+    }
+
+    #loveMsg {
+      display: none;
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff007f;
+      animation: fadeIn 1.5s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- floating hearts -->
+  <script>
+    for (let i = 0; i < 20; i++) {
+      let h = document.createElement('div');
+      h.classList.add('heart');
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.animationDelay = Math.random() * 8 + 's';
+      h.style.background = `rgba(255,182,193,${Math.random()})`;
+      document.body.appendChild(h);
+    }
+  </script>
+
+  <!-- PAGE 1: Envelope -->
+  <section id="page1" class="active">
+    <h1>For You Majhi Chimnuuu 🫶</h1>
+    <div class="envelope" id="envelopeBtn" role="button" aria-pressed="false" tabindex="0" aria-label="Tap to open letter">
+      <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#fff" />
+            <stop offset="1" stop-color="#fff0f2" />
+          </linearGradient>
+        </defs>
+        <rect x="2" y="6" rx="6" ry="6" width="60" height="36" fill="url(#g1)" stroke="#ffd0e3" stroke-width="1" />
+        <path d="M4 8 L32 28 L60 8" fill="none" stroke="#ff9fc0" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </div>
+    <div class="tap-hint" id="tapHint">Tap on it ✨</div>
+  </section>
+
+  <!-- PAGE 2: Couple -->
+  <section id="page2">
+    <img src="images/couple-main.jpg" alt="couple" class="couple">
+    <p>
+      I am sooo sooo sollyyy babuuuu asaa tula sodunnn yaylaaa<br>
+      🧿🧿🧿🫂🫂🫂🧿🧿🧿<br>
+      i'll never do this againn🧿🧿🧿❤️❤️❤️🥹🥹🥹😘😘😘🫶🫶🫶🫀🫀🫀🧿🧿🧿
+    </p>
+    <button class="btn" onclick="nextPage()">Next</button>
+  </section>
+
+  <!-- PAGE 3: Love Letter + Music -->
+  <section id="page3">
+    <div class="love-letter">
+      <h3>💖 My Apology Letter 💖</h3>
+      <p>
+        Yee majhaa cuttuuu polgaaa...🐒🥹<br>
+        I'm soo sooo sooooo sorryyyyyyy papluuuuu🥹🥹🥹<br>
+        me punha asaaa nahi kalnallll tula ektyala sodun nahi yenarrr babuuu kadhich asaaaa🧿🧿🧿<br>
+        Aaniii babuuu tuuu majhaaa cuttuuulaaa gubluuu gubluuuu chimnuuuu aahesss kaaa monkieeee🐵🐵🐵🧿🧿🧿<br>
+        i loveeee youuuuu sooo sooo sooo muchhhh chimnieee majhiiii🧿🧿🧿🌷🌷🌷🥹🥹🥹🐵🐵🐵😍😍😍💕💕💕😘😘😘❤️❤️❤️🫶🫶🫶🫀🫀🫀🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
+        Aaniii babuuuu me aata pasun majha raaggg prema vr haviii nahi houuu denqrrr me purna try kren<br>
+        nahi ragavnar babuuu meee aaniii kay pn bolnarrr nahiiii je majhyaaa chimnuuu la hurt hoill asaaa🧿🧿🧿🫶🫶🫶😘😘😘❤️❤️❤️🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
+        sollyyyy sollyyyy sollyyyy🧿🧿🧿
+      </p>
+    </div>
+    <br>
+    <audio id="song" src="audio/Tu Hain Toh Mr And Mrs Mahi 128 Kbps.mp3" controls></audio>
+    <br>
+    <div>
+      <button class="btn" onclick="seek(-5)">⏮</button>
+      <button class="btn" onclick="document.getElementById('song').play()">▶</button>
+      <button class="btn" onclick="document.getElementById('song').pause()">❚❚</button>
+      <button class="btn" onclick="seek(5)">⏭</button>
+    </div>
+    <button class="btn" onclick="nextPage()">Next</button>
+  </section>
+
+  <!-- PAGE 4: Doodle Cards -->
+  <section id="page4">
+    <h2>🫶 Moments of Us 🫶</h2>
+    <br>
+    <div class="cards">
+      <div class="card"><img src="images/doodle1.jpg"><span>Heyy heyy heyyyy Smileee💕</span></div>
+      <div class="card"><img src="images/doodle2.jpg"><span>Majhii sunshineee cutieee ☀️</span></div>
+      <div class="card"><img src="images/doodle3.jpg"><span>Forever together 💫</span></div>
+      <div class="card"><img src="images/doodle4.jpg"><span>Cutiee Patotieee (MEEE) 💓</span></div>
+      <div class="card"><img src="images/doodle5.jpg"><span>Cuchieee puchieeeee 😘</span></div>
+      <div class="card"><img src="images/doodle6.jpg"><span>Always US 🌸</span></div>
+      <div class="card"><img src="images/doodle7.jpg"><span>We are Married Now💍</span></div>
+      <div class="card"><img src="images/doodle8.jpg"><span>Majhaa Foolll 💞</span></div>
+      <div class="card"><img src="images/doodle9.jpg"><span>Cutieeee Pyaal hai tu meraaa😘</span></div>
+      <div class="card"><img src="images/doodle10.jpg"><span>Chonulaaa 😘❤️</span></div>
+    </div>
+    <button class="btn" onclick="nextPage()">Next</button>
+  </section>
+
+  <!-- PAGE 5: Surprise Box -->
+  <section id="page5">
+    <h2>Click the Box 🎁</h2>
+    <div class="box" onclick="showLove()"></div>
+    <p id="loveMsg">I LOVE YOU SOOO MUCHHHH Babuuuuuu 😘❤️</p>
+  </section>
+
+  <script>
+    let current = 1;
+
+    function nextPage() {
+      document.getElementById(`page${current}`).classList.remove('active');
+      current++;
+      document.getElementById(`page${current}`).classList.add('active');
+    }
+
+    document.querySelector('.envelope').onclick = () => nextPage();
+
+    function seek(sec) {
+      const audio = document.getElementById('song');
+      audio.currentTime += sec;
+    }
+
+    function showLove() {
+      document.querySelector('.box').style.display = 'none';
+      document.getElementById('loveMsg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
