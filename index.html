@@ -252,8 +252,8 @@
   <!-- PAGE 1: Envelope -->
   <section id="page1" class="active">
     <h1>For You Majhi Chimnuuu 🫶</h1>
-    <div class="envelope" id="envelopeBtn">
-      <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg">
+    <div class="envelope" id="envelopeBtn" role="button" aria-pressed="false" tabindex="0" aria-label="Tap to open letter">
+      <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
             <stop offset="0" stop-color="#fff" />
@@ -264,21 +264,34 @@
         <path d="M4 8 L32 28 L60 8" fill="none" stroke="#ff9fc0" stroke-width="2" stroke-linecap="round" />
       </svg>
     </div>
-    <div class="tap-hint">Tap on it ✨</div>
+    <div class="tap-hint" id="tapHint">Tap on it ✨</div>
   </section>
 
-  <!-- PAGE 2 -->
+  <!-- PAGE 2: Couple -->
   <section id="page2">
     <img src="images/couple-main.jpg" alt="couple" class="couple">
-    <p>I am sooo sooo sollyyy babuuuu...<br>I'll never do this again 🥹❤️🫶</p>
+    <p>
+      I am sooo sooo sollyyy babuuuu asaa tula sodunnn yaylaaa<br>
+      🧿🧿🧿🫂🫂🫂🧿🧿🧿<br>
+      i'll never do this againn🧿🧿🧿❤️❤️❤️🥹🥹🥹😘😘😘🫶🫶🫶🫀🫀🫀🧿🧿🧿
+    </p>
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 3 -->
+  <!-- PAGE 3: Love Letter + Music -->
   <section id="page3">
     <div class="love-letter">
       <h3>💖 My Apology Letter 💖</h3>
-      <p>I'm sooo sorryyy babuuu... won't ever hurt you again 🥹💞</p>
+      <p>
+        Yee majhaa cuttuuu polgaaa...🐒🥹<br>
+        I'm soo sooo sooooo sorryyyyyyy papluuuuu🥹🥹🥹<br>
+        me punha asaaa nahi kalnallll tula ektyala sodun nahi yenarrr babuuu kadhich asaaaa🧿🧿🧿<br>
+        Aaniii babuuu tuuu majhaaa cuttuuulaaa gubluuu gubluuuu chimnuuuu aahesss kaaa monkieeee🐵🐵🐵🧿🧿🧿<br>
+        i loveeee youuuuu sooo sooo sooo muchhhh chimnieee majhiiii🧿🧿🧿🌷🌷🌷🥹🥹🥹🐵🐵🐵😍😍😍💕💕💕😘😘😘❤️❤️❤️🫶🫶🫶🫀🫀🫀🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
+        Aaniii babuuuu me aata pasun majha raaggg prema vr haviii nahi houuu denqrrr me purna try kren<br>
+        nahi ragavnar babuuu meee aaniii kay pn bolnarrr nahiiii je majhyaaa chimnuuu la hurt hoill asaaa🧿🧿🧿🫶🫶🫶😘😘😘❤️❤️❤️🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
+        sollyyyy sollyyyy sollyyyy🧿🧿🧿
+      </p>
     </div>
     <br>
     <audio id="song" src="audio/Tu Hain Toh Mr And Mrs Mahi 128 Kbps.mp3" controls></audio>
@@ -292,19 +305,26 @@
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 4 -->
+  <!-- PAGE 4: Doodle Cards -->
   <section id="page4">
     <h2>🫶 Moments of Us 🫶</h2>
+    <br>
     <div class="cards">
-      <div class="card"><img src="images/doodle1.jpg"><span>Heyy Smileee💕</span></div>
-      <div class="card"><img src="images/doodle2.jpg"><span>Sunshineee ☀️</span></div>
+      <div class="card"><img src="images/doodle1.jpg"><span>Heyy heyy heyyyy Smileee💕</span></div>
+      <div class="card"><img src="images/doodle2.jpg"><span>Majhii sunshineee cutieee ☀️</span></div>
       <div class="card"><img src="images/doodle3.jpg"><span>Forever together 💫</span></div>
-      <div class="card"><img src="images/doodle4.jpg"><span>Cutiee 💓</span></div>
+      <div class="card"><img src="images/doodle4.jpg"><span>Cutiee Patotieee (MEEE) 💓</span></div>
+      <div class="card"><img src="images/doodle5.jpg"><span>Cuchieee puchieeeee 😘</span></div>
+      <div class="card"><img src="images/doodle6.jpg"><span>Always US 🌸</span></div>
+      <div class="card"><img src="images/doodle7.jpg"><span>We are Married Now💍</span></div>
+      <div class="card"><img src="images/doodle8.jpg"><span>Majhaa Foolll 💞</span></div>
+      <div class="card"><img src="images/doodle9.jpg"><span>Cutieeee Pyaal hai tu meraaa😘</span></div>
+      <div class="card"><img src="images/doodle10.jpg"><span>Chonulaaa 😘❤️</span></div>
     </div>
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 5 -->
+  <!-- PAGE 5: Surprise Box -->
   <section id="page5">
     <h2>Click the Box 🎁</h2>
     <div class="box" onclick="showLove()"></div>
@@ -313,16 +333,20 @@
 
   <script>
     let current = 1;
+
     function nextPage() {
       document.getElementById(`page${current}`).classList.remove('active');
       current++;
       document.getElementById(`page${current}`).classList.add('active');
     }
+
     document.querySelector('.envelope').onclick = () => nextPage();
+
     function seek(sec) {
       const audio = document.getElementById('song');
       audio.currentTime += sec;
     }
+
     function showLove() {
       document.querySelector('.box').style.display = 'none';
       document.getElementById('loveMsg').style.display = 'block';
@@ -330,3 +354,4 @@
   </script>
 </body>
 </html>
+
