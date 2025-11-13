@@ -26,6 +26,7 @@
       bottom: -20px;
       opacity: 0.7;
       border-radius: 2px;
+      z-index: 0;
     }
     .heart::before, .heart::after {
       content: '';
@@ -51,6 +52,8 @@
       align-items: center;
       flex-direction: column;
       padding: 30px;
+      position: relative;
+      z-index: 1;
     }
     .active { display: flex; }
 
@@ -65,34 +68,26 @@
       box-shadow: 0 10px 30px rgba(255, 105, 150, 0.12);
       cursor: pointer;
       transition: transform .35s cubic-bezier(.2, .9, .3, 1), box-shadow .35s;
-      position: relative;
     }
     .envelope:hover {
       transform: translateY(-6px) rotate(-2deg);
       box-shadow: 0 18px 40px rgba(255, 120, 160, 0.18);
     }
-    .envelope svg {
-      width: 120px;
-      height: auto;
-      display: block;
-    }
-
     .tap-hint {
       font-size: 14px;
-      color: var(--muted);
-      margin-top: 6px;
-      opacity: 0.95;
+      opacity: 0.8;
       animation: blink 2.2s infinite;
     }
     @keyframes blink {
-      0% { opacity: 0.2 }
+      0% { opacity: 0.3 }
       50% { opacity: 1 }
-      100% { opacity: 0.2 }
+      100% { opacity: 0.3 }
     }
 
     /* couple image */
     .couple {
-      width: 280px;
+      width: 90%;
+      max-width: 300px;
       border-radius: 12px;
       animation: fadeIn 2s ease;
     }
@@ -103,7 +98,7 @@
 
     /* button */
     .btn {
-      margin-top: 20px;
+      margin-top: 15px;
       padding: 10px 20px;
       background: #ff8fb1;
       border: none;
@@ -124,7 +119,8 @@
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
       padding: 20px;
-      width: 500px;
+      width: 90%;
+      max-width: 500px;
       animation: pop 1s ease;
     }
     @keyframes pop {
@@ -136,13 +132,13 @@
     .cards {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
+      gap: 12px;
       justify-content: center;
     }
     .card {
       position: relative;
-      width: 250px;
-      height: 270px;
+      width: 150px;
+      height: 170px;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(255, 0, 100, 0.3);
@@ -164,15 +160,18 @@
       transform: translate(-50%, -50%);
       color: #fff;
       font-weight: bold;
+      font-size: 14px;
       opacity: 0;
       transition: 0.4s;
+      text-align: center;
+      padding: 5px;
     }
     .card:hover span { opacity: 1; }
 
     /* surprise box */
     .box {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
       background: #ffb6c1;
       position: relative;
       border-radius: 8px;
@@ -182,10 +181,10 @@
     .box::before {
       content: '';
       position: absolute;
-      width: 150px;
-      height: 20px;
+      width: 120px;
+      height: 18px;
       background: #ff99c8;
-      top: -20px;
+      top: -18px;
       left: 0;
       border-radius: 8px 8px 0 0;
     }
@@ -196,10 +195,42 @@
 
     #loveMsg {
       display: none;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: bold;
       color: #ff007f;
       animation: fadeIn 1.5s ease;
+      margin-top: 20px;
+    }
+
+    audio {
+      width: 90%;
+      max-width: 400px;
+    }
+
+    /* 💕 MOBILE RESPONSIVENESS */
+    @media (max-width: 600px) {
+      h1, h2, h3 {
+        font-size: 1.3rem;
+      }
+      p {
+        font-size: 15px;
+        line-height: 1.4;
+      }
+      .btn {
+        font-size: 14px;
+        padding: 8px 16px;
+      }
+      .love-letter {
+        width: 95%;
+        font-size: 14px;
+      }
+      .cards {
+        gap: 10px;
+      }
+      .card {
+        width: 130px;
+        height: 150px;
+      }
     }
   </style>
 </head>
@@ -221,8 +252,8 @@
   <!-- PAGE 1: Envelope -->
   <section id="page1" class="active">
     <h1>For You Majhi Chimnuuu 🫶</h1>
-    <div class="envelope" id="envelopeBtn" role="button" aria-pressed="false" tabindex="0" aria-label="Tap to open letter">
-      <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <div class="envelope" id="envelopeBtn">
+      <svg viewBox="0 0 64 48" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
             <stop offset="0" stop-color="#fff" />
@@ -233,34 +264,21 @@
         <path d="M4 8 L32 28 L60 8" fill="none" stroke="#ff9fc0" stroke-width="2" stroke-linecap="round" />
       </svg>
     </div>
-    <div class="tap-hint" id="tapHint">Tap on it ✨</div>
+    <div class="tap-hint">Tap on it ✨</div>
   </section>
 
-  <!-- PAGE 2: Couple -->
+  <!-- PAGE 2 -->
   <section id="page2">
     <img src="images/couple-main.jpg" alt="couple" class="couple">
-    <p>
-      I am sooo sooo sollyyy babuuuu asaa tula sodunnn yaylaaa<br>
-      🧿🧿🧿🫂🫂🫂🧿🧿🧿<br>
-      i'll never do this againn🧿🧿🧿❤️❤️❤️🥹🥹🥹😘😘😘🫶🫶🫶🫀🫀🫀🧿🧿🧿
-    </p>
+    <p>I am sooo sooo sollyyy babuuuu...<br>I'll never do this again 🥹❤️🫶</p>
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 3: Love Letter + Music -->
+  <!-- PAGE 3 -->
   <section id="page3">
     <div class="love-letter">
       <h3>💖 My Apology Letter 💖</h3>
-      <p>
-        Yee majhaa cuttuuu polgaaa...🐒🥹<br>
-        I'm soo sooo sooooo sorryyyyyyy papluuuuu🥹🥹🥹<br>
-        me punha asaaa nahi kalnallll tula ektyala sodun nahi yenarrr babuuu kadhich asaaaa🧿🧿🧿<br>
-        Aaniii babuuu tuuu majhaaa cuttuuulaaa gubluuu gubluuuu chimnuuuu aahesss kaaa monkieeee🐵🐵🐵🧿🧿🧿<br>
-        i loveeee youuuuu sooo sooo sooo muchhhh chimnieee majhiiii🧿🧿🧿🌷🌷🌷🥹🥹🥹🐵🐵🐵😍😍😍💕💕💕😘😘😘❤️❤️❤️🫶🫶🫶🫀🫀🫀🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
-        Aaniii babuuuu me aata pasun majha raaggg prema vr haviii nahi houuu denqrrr me purna try kren<br>
-        nahi ragavnar babuuu meee aaniii kay pn bolnarrr nahiiii je majhyaaa chimnuuu la hurt hoill asaaa🧿🧿🧿🫶🫶🫶😘😘😘❤️❤️❤️🌎🌎🌎🫂🫂🫂🧿🧿🧿<br>
-        sollyyyy sollyyyy sollyyyy🧿🧿🧿
-      </p>
+      <p>I'm sooo sorryyy babuuu... won't ever hurt you again 🥹💞</p>
     </div>
     <br>
     <audio id="song" src="audio/Tu Hain Toh Mr And Mrs Mahi 128 Kbps.mp3" controls></audio>
@@ -274,26 +292,19 @@
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 4: Doodle Cards -->
+  <!-- PAGE 4 -->
   <section id="page4">
     <h2>🫶 Moments of Us 🫶</h2>
-    <br>
     <div class="cards">
-      <div class="card"><img src="images/doodle1.jpg"><span>Heyy heyy heyyyy Smileee💕</span></div>
-      <div class="card"><img src="images/doodle2.jpg"><span>Majhii sunshineee cutieee ☀️</span></div>
+      <div class="card"><img src="images/doodle1.jpg"><span>Heyy Smileee💕</span></div>
+      <div class="card"><img src="images/doodle2.jpg"><span>Sunshineee ☀️</span></div>
       <div class="card"><img src="images/doodle3.jpg"><span>Forever together 💫</span></div>
-      <div class="card"><img src="images/doodle4.jpg"><span>Cutiee Patotieee (MEEE) 💓</span></div>
-      <div class="card"><img src="images/doodle5.jpg"><span>Cuchieee puchieeeee 😘</span></div>
-      <div class="card"><img src="images/doodle6.jpg"><span>Always US 🌸</span></div>
-      <div class="card"><img src="images/doodle7.jpg"><span>We are Married Now💍</span></div>
-      <div class="card"><img src="images/doodle8.jpg"><span>Majhaa Foolll 💞</span></div>
-      <div class="card"><img src="images/doodle9.jpg"><span>Cutieeee Pyaal hai tu meraaa😘</span></div>
-      <div class="card"><img src="images/doodle10.jpg"><span>Chonulaaa 😘❤️</span></div>
+      <div class="card"><img src="images/doodle4.jpg"><span>Cutiee 💓</span></div>
     </div>
     <button class="btn" onclick="nextPage()">Next</button>
   </section>
 
-  <!-- PAGE 5: Surprise Box -->
+  <!-- PAGE 5 -->
   <section id="page5">
     <h2>Click the Box 🎁</h2>
     <div class="box" onclick="showLove()"></div>
@@ -302,25 +313,20 @@
 
   <script>
     let current = 1;
-
     function nextPage() {
       document.getElementById(`page${current}`).classList.remove('active');
       current++;
       document.getElementById(`page${current}`).classList.add('active');
     }
-
     document.querySelector('.envelope').onclick = () => nextPage();
-
     function seek(sec) {
       const audio = document.getElementById('song');
       audio.currentTime += sec;
     }
-
     function showLove() {
       document.querySelector('.box').style.display = 'none';
       document.getElementById('loveMsg').style.display = 'block';
     }
   </script>
-
 </body>
 </html>
